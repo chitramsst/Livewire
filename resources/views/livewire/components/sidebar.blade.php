@@ -23,10 +23,32 @@
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
     </div>
+    
     <div x-show="open"   x-transition.origin.top.left @click.outside="open = false" class="flex flex-col justify-center p-5 space-y-5">
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('settings/application') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.settings.application')}}"> Application Settings
       </a>
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('settings/email') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.settings.email')}}"> Email Settings
+      </a>
+    </div>
+  </div>
+  <!-- payment  -->
+  <div x-data="{ open: $persist(false) }" :class="{ 'bg-gray-700 rounded-3xl': open}">
+    <div class="font-semibold flex flex-row justify-start items-center space-x-2 {{ Request::is('payment-gateway/*') ? 'text-black shadow-2xl bg-slate-50 rounded-2xl p-2' : '' }}" @click="open = true">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-8 w-8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"></path>
+      </svg>
+      <span x-show="sidebarOpen" class="hidden lg:block">PaymentGateways</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+    </div>
+    
+    <div x-show="open"   x-transition.origin.top.left @click.outside="open = false" class="flex flex-col justify-center p-5 space-y-5">
+      <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/razor') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.razor')}}"> Razorpay
+      </a>
+      <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/stripe') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.stripe')}}"> Stripe
+      </a>
+      <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/paypal') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.paypal')}}"> Paypal
       </a>
     </div>
   </div>
