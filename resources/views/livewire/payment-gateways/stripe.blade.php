@@ -6,145 +6,46 @@ Tanishka@12345#
 publishable key: pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8
 secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt -->
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ __('all.stripe_payment_gateway')}}</title>
-    <!-- <link rel="stylesheet" href="{{ asset('assets/common/bootstrap.min.css') }}" />
-    <script src="{{asset('assets/backend/plugins/jquery/jquery.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('assets/install/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/install/css/backend-plugin.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/install/css/backende209.css?v=1.0.0')}}"> -->
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-
-
-    <style type="text/css">
-        .panel-title {
-            display: inline;
-            font-weight: bold;
-        }
-        .display-table {
-            display: table;
-        }
-        .display-tr {
-            display: table-row;
-        }
-        .display-td {
-            display: table-cell;
-            vertical-align: middle;
-            width: 61%;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <br><br><br><br>
-    <br><br><br><br>
-    <div class="card card-warning">
-        <div class="card-header">
-          <h3 class="card-title">{{ __('all.payment_details')}}</h3>
-        </div>
-        <div class="card-body">
-            <div class="panel-body">
-                @if (Session::has('success'))
-                    <div class="alert alert-success text-center">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        <p>{{ Session::get('success') }}</p>
-                    </div>
-                @endif
-                <form class="require-validation"
+<div class="mx-24 pt-20">
+<form class="require-validation"
                       data-cc-on-file="false"
                       data-stripe-publishable-key="pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8"
                       id="payment-form">
-                    @csrf
-                    <div class='form-group'>
-                        <div class='col-xs-12 form-group required'>
-                            <label class='control-label'>{{ __('all.name_on_card')}}</label> <input
-                                class='form-control' size='4' type='text'>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <div class='col-xs-12 form-group required'>
-                            <label class='control-label'>{{ __('all.card_number')}}</label> <input
-                                autocomplete='off' class="form-control card-number" size="16" id="number" maxlength="19"
-                                type='text'>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <div class='col-xs-12 col-md-4 form-group cvc required'>
-                            <label class='control-label'>{{ __('all.cvc')}}</label> <input autocomplete='off'
-                                                                            class='form-control card-cvc' placeholder='ex. 311' maxlength='4'
-                                                                            type='text'>
-                        </div>
-                        <div class='col-xs-12 col-md-4 form-group expiration required'>
-                            <label class='control-label'>{{ __('all.expiration_month')}}</label> <input
-                                class='form-control card-expiry-month' placeholder='MM' size='2' maxlength="2"
-                                type='text'>
-                        </div>
-                        <div class='col-xs-12 col-md-4 form-group expiration required'>
-                            <label class='control-label'>{{ __('all.expiration_year')}}</label> <input
-                                class='form-control card-expiry-year' placeholder='YYYY' size='4' maxlength='4'
-                                type='text'>
-                        </div>
-                    </div>
-                    <div class='form-row row'>
-                        <div class='col-md-12 error form-group hide'>
-                            <div class='alert-danger alert'>{{ __('all.error_correction')}}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button class="btn btn-warning btn-lg btn-block" wire:click="stripePost">{{ __('all.pay_now')}} 100 </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-      </div>
-
-    </div>
+                      <div class="mb-6">
+    <label for="cardname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Name on Card</label>
+    <input type="text" id="cardname" maxlength="19"  class="card-name shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
+  </div>
+  <div class="w-full flex flex-row justify-between space-x-4 mb-6">
+  <div class="w-4/6">
+    <label for="cardnumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Card Number</label>
+    <input type="text" id="cardnumber" maxlength="19" class="card-number number shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
+  </div>
+  <div class="w-2/6">
+    <label for="card-cvc" class="card-cvc block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">CVV</label>
+    <input type="text" id="card-cvc" placeholder='ex. 311' maxlength='4' class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
+  </div>
 </div>
-</body>
+<div class="w-full flex flex-row justify-between space-x-4 mb-6">
+  <div class="w-1/2">
+    <label for="card-expiry-month" class="card-expiry-month block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Card Expiry Month</label>
+    <input type="text" id="card-expiry-month" class="card-expiry-month shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
+  </div>
+  <div class="w-1/2">
+    <label for="card-expiry-year" class="card-expiry-month block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Card Expiry Year</label>
+    <input type="text" id="card-expiry-year" class="card-expiry-month shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
+  </div>
+</div>
+  <button wire:click="$emit('setToken')" class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay Now</button>
+</form>
+</div>
 
-<script src="https://js.stripe.com/v2/"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 @push('js')
-<script type="text/javascript">
-    $(function() {
-        'use strict';
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
-        var $form         = $(".require-validation");
-        $('form.require-validation').bind('submit', function(e) {
-            var $form         = $(".require-validation"),
-                inputSelector = ['input[type=email]', 'input[type=password]',
-                    'input[type=text]', 'input[type=file]','input[type=hidden]',
-                    'textarea'].join(', '),
-                $inputs       = $form.find('.required').find(inputSelector),
-                $errorMessage = $form.find('div.error'),
-                valid         = true;
-            $errorMessage.addClass('hide');
-            $('.has-error').removeClass('has-error');
-            $inputs.each(function(i, el) {
-                var $input = $(el);
-                if ($input.val() === '') {
-                    /* if the input value is empty */
-                    $input.parent().addClass('has-error');
-                    $errorMessage.removeClass('hide');
-                    e.preventDefault();
-                }
-            });
-            if (!$form.data('cc-on-file')) {
-                /* stripe card creation */
-                e.preventDefault();
-                Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+<script>
+    Livewire.on('setToken',()=>{
+        Stripe.setPublishableKey($form.data('stripe-publishable-key'));
                 Stripe.card.createToken({
                     number: $('.card-number').val(),
                     cvc: $('.card-cvc').val(),
@@ -152,9 +53,8 @@ secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpu
                     exp_year: $('.card-expiry-year').val(),
                     address_zip: $('.address_zip').val(),
                 }, stripeResponseHandler);
-            }
-        });
-        function stripeResponseHandler(status, response) {
+
+                function stripeResponseHandler(status, response) {
             //alert(JSON.stringify(response));
             'use strict';
             if (response.error) {
@@ -166,22 +66,20 @@ secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpu
             } else {
                 /* if the response has success */
                 var token = response['id'];
-                alert(token);
                 @this.set('token',token);
-                // $form.find('input[type=text]').empty();
-                // $form.append("<input type='hidden' name='amount' value='" + $('#amount').val() + "'/>");
-                // $form.append("<input type='hidden' name='email' value='" + $('#email').val() + "'/>");
-                // $form.append("<input type='hidden' name='id' value='" + $('#id').val() + "'/>");
-                $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                $form.get(0).submit();
             }
         }
     });
-</script>
+    </script>
+    <script>
+        Livewire.on('success',(status)=>{
+             alert(status);
+        })
+        </script>
 
 <script type="text/javascript">
   /* enable spacing for credit card number     */
-  $('#number').on('keyup', function(e){
+  $('#cardnumber').on('keyup', function(e){
     var val = $(this).val();
     var newval = '';
     val = val.replace(/\s/g, '');

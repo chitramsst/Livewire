@@ -24,8 +24,9 @@ class Stripe extends Component
       'payment_method' => 'pm_card_visa',
     ]);
 
-    dd($status);
-    return redirect('success');
+    $this->emit('success',$status);
+    
+    //return redirect('/success');
 
 
     // $settings = new MasterSetting();
