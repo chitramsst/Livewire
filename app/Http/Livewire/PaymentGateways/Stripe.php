@@ -19,12 +19,13 @@ class Stripe extends Component
     $stripe = new \Stripe\StripeClient('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
 
     $status = $stripe->paymentIntents->create([
-      'amount' => 500,
+      'amount' => 90000,
       'currency' => 'INR',
       'payment_method' => 'pm_card_visa',
     ]);
 
-    $this->emit('success',$status);
+    dd($status);
+    //$this->emit('success',$status);
     
     //return redirect('/success');
 
