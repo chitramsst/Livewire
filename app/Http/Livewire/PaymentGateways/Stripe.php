@@ -10,8 +10,25 @@ class Stripe extends Component
   public $token;
   public function render()
   {
+    $this->emit('test');
     return view('livewire.payment-gateways.stripe');
   }
+
+  public function check(){
+    $stripe = new \Stripe\StripeClient('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
+
+    $test = $stripe->paymentLinks->create([
+      'line_items' => [
+        [
+          'price' => '300',
+          'quantity' => 1,
+        ],
+      ],
+    ]);
+  dd($test);
+
+  }
+
   /* stripe payment section (after transaction) */
   public function stripePost()
   {
