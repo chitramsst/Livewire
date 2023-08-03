@@ -13,7 +13,7 @@ class Paystack extends Component
     }
 
     public function processData($data){
-       dd($data);
+       dd($data['status']);
     }
     public function pay()
     {
