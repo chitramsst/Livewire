@@ -15,18 +15,70 @@ class Stripe extends Component
   }
 
   public function check(){
-    $stripe = new \Stripe\StripeClient('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
+    \Stripe\Stripe::setApiKey('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
+    try {
+        // Create the PaymentIntent
+      $intent = \Stripe\PaymentIntent::create([
+        'amount' => 90000,
+        'currency' => 'INR',
+        'payment_method_types' => [ 
+          'card' 
+      ] ,
+        // 'confirmation_method' => 'manual',
+        // 'confirm' => true,
+        // A PaymentIntent can be confirmed some time after creation,
+        // but here we want to confirm (collect payment) immediately.
+       // 'confirm' => true,
+  
+        // If the payment requires any follow-up actions from the
+        // customer, like two-factor authentication, Stripe will error
+        // and you will need to prompt them for a new payment method.
+      //  'error_on_requires_action' => true,
+      ]);
+      $this->generateResponse($intent);
+    } catch (\Stripe\Exception\ApiErrorException $e) {
+      // Display error on client
+      echo json_encode(['error' => $e->getMessage()]);
+    }
+  }
 
-    $test = $stripe->paymentLinks->create([
-      'line_items' => [
-        [
-          'price' => '300',
-          'quantity' => 1,
-        ],
-      ],
-    ]);
-  dd($test);
 
+  // public function generateResponse($intent) {
+  //   dd($intent);
+  //   if ($intent->status == 'succeeded') {
+  //     dd("success");
+  //     // Handle post-payment fulfillment
+  //     echo json_encode(['success' => true]);
+  //   } else {
+  //     dd("not success");
+  //     // Any other status would be unexpected, so error
+  //     echo json_encode(['error' => 'Invalid PaymentIntent status']);
+  //   }
+  // }
+
+
+  function generateResponse($intent) {
+    dd($intent->status);
+    # Note that if your API version is before 2019-02-11, 'requires_action'
+    # appears as 'requires_source_action'.
+    if ($intent->status == 'requires_action' &&
+        $intent->next_action->type == 'use_stripe_sdk') {
+      # Tell the client to handle the action
+      echo json_encode([
+        'requires_action' => true,
+        'payment_intent_client_secret' => $intent->client_secret
+      ]);
+    } else if ($intent->status == 'succeeded') {
+      # The payment didn’t need any additional actions and completed!
+      # Handle post-payment fulfillment
+      echo json_encode([
+        "success" => true
+      ]);
+    } else {
+      # Invalid status
+      http_response_code(500);
+      echo json_encode(['error' => 'Invalid PaymentIntent status']);
+    }
   }
 
   /* stripe payment section (after transaction) */

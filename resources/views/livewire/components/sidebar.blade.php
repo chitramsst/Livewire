@@ -20,11 +20,11 @@
       </svg>
       <span x-show="sidebarOpen" class="hidden lg:block">Settings</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
     </div>
-    
-    <div x-show="open"   x-transition.origin.top.left @click.outside="open = false" class="flex flex-col justify-center p-5 space-y-5">
+
+    <div x-show="open" x-transition.origin.top.left @click.outside="open = false" class="flex flex-col justify-center p-5 space-y-5">
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('settings/application') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.settings.application')}}"> Application Settings
       </a>
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('settings/email') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.settings.email')}}"> Email Settings
@@ -39,16 +39,18 @@
       </svg>
       <span x-show="sidebarOpen" class="hidden lg:block">PaymentGateways</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
     </div>
-    
-    <div x-show="open"   x-transition.origin.top.left @click.outside="open = false" class="flex flex-col justify-center p-5 space-y-5">
+
+    <div x-show="open" x-transition.origin.top.left @click.outside="open = false" class="flex flex-col justify-center p-5 space-y-5">
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/razor') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.razor')}}"> Razorpay
       </a>
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/stripe') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.stripe')}}"> Stripe
       </a>
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/paypal') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.paypal')}}"> Paypal
+      </a>
+      <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/paystack') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.paystack')}}"> Paystack
       </a>
     </div>
   </div>

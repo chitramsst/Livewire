@@ -4,7 +4,11 @@ chitra.msst.office@gmail.com
 Tanishka@12345#
 
 publishable key: pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8
-secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt -->
+secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt 
+https://stripe.com/docs/payments/without-card-authentication
+
+https://stripe.com/docs/payments/accept-a-payment-synchronously
+-->
 
     <div class="mx-64 pt-20">
         <form class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8" id="payment-form">
@@ -45,6 +49,7 @@ secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpu
 @push('js')
 <script>
     Livewire.on('setToken', () => {
+        
         Stripe.setPublishableKey("pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8");
         Stripe.card.createToken({
             number: $('.card-number').val(),
@@ -53,6 +58,8 @@ secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpu
             exp_year: $('.card-expiry-year').val(),
            // address_zip: $('.address_zip').val(),
         }, stripeResponseHandler);
+
+       
 
         function stripeResponseHandler(status, response) {
             alert(JSON.stringify(response));
@@ -68,6 +75,7 @@ secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpu
                 var token = response['id'];
                 @this.set('token', token);
                 alert(token)
+                @this.check();
             }
         }
     });

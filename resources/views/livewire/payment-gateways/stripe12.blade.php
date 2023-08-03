@@ -10,7 +10,22 @@
         document.addEventListener('livewire:load', function() {
             const stripe = Stripe('pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8');
             const elements = stripe.elements();
-            const cardElement = elements.create('card');
+            const style = {
+  base: {
+    color: "#32325d",
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: "antialiased",
+    fontSize: "16px",
+    "::placeholder": {
+      color: "#aab7c4"
+    }
+  },
+  invalid: {
+    color: "#fa755a",
+    iconColor: "#fa755a"
+  },
+};
+            const cardElement = elements.create('card', {style});
             cardElement.mount('#card-element');
         })
     </script>
