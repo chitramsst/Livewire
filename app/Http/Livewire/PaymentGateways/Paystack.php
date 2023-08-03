@@ -12,6 +12,9 @@ class Paystack extends Component
         return view('livewire.payment-gateways.paystack');
     }
 
+    public function processData($data){
+       dd($data);
+    }
     public function pay()
     {
         try {
@@ -20,7 +23,8 @@ class Paystack extends Component
 
             $fields = [
                 'email' => "customer@email.com",
-                'amount' => "20000"
+                'amount' => "20000",
+                'userid' => "test1234"
             ];
 
             $fields_string = http_build_query($fields);
