@@ -49,17 +49,17 @@ https://stripe.com/docs/payments/accept-a-payment-synchronously
 @push('js')
 <script>
     Livewire.on('setToken', () => {
-        
+
         Stripe.setPublishableKey("pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8");
         Stripe.card.createToken({
             number: $('.card-number').val(),
             cvc: $('.card-cvc').val(),
             exp_month: $('.card-expiry-month').val(),
             exp_year: $('.card-expiry-year').val(),
-           // address_zip: $('.address_zip').val(),
+            // address_zip: $('.address_zip').val(),
         }, stripeResponseHandler);
 
-       
+
 
         function stripeResponseHandler(status, response) {
             alert(JSON.stringify(response));
@@ -73,8 +73,14 @@ https://stripe.com/docs/payments/accept-a-payment-synchronously
             } else {
                 /* if the response has success */
                 var token = response['id'];
+                // Stripe.card.handleCardAction('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt')
+                //     .then(function(result) {
+                //         alert("result");
+                //         // Handle result.error or result.paymentIntent
+                //     });
+
                 @this.set('token', token);
-                alert(token)
+                //alert(token)
                 @this.check();
             }
         }

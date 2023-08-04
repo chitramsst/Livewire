@@ -9,6 +9,8 @@ https://dev.to/ejiro/integrating-flutterwaves-secure-payment-gateway-into-your-w
 https://dev.to/ejiro/integrating-flutterwaves-secure-payment-gateway-into-your-website-using-php-4187
 https://codeflarelimited.com/blog/flutterwave-payment-integration-with-php/#:~:text=FlutterWave%20payment%20integration%20with%20PHP%20can%20be%20a%20tedious%20process,users%20to%20make%20online%20payments.
 
+chitra.xfortech@gmail.com
+Test@12345#
 test card in flutter wave
 
 Card Number: 5531 8866 5214 2950.
