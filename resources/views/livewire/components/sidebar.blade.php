@@ -52,6 +52,8 @@
       </a>
       <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/paystack') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.paystack')}}"> Paystack
       </a>
+      <a @click="open = true" class="font-small -ml-4 flex flex-row justify-start items-center space-x-2 pl-1 pr-2 py-2 {{ Request::is('payment-gateway/flutterwave') ? 'text-white shadow-2xl bg-slate-500 rounded-2xl' : '' }} " href="{{route('admin.flutterwave')}}"> Flutterwave
+      </a>
     </div>
   </div>
   <a class=" font-semibold flex flex-row justify-start items-center space-x-2" wire:click.prevent="logout">

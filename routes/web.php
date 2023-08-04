@@ -5,6 +5,7 @@ use App\Http\Livewire\Admin\Settings\Email;
 use App\Http\Livewire\Admin\Settings\Settings;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Login;
+use App\Http\Livewire\PaymentGateways\Flutterwave;
 use App\Http\Livewire\PaymentGateways\Stripe;
 use App\Http\Livewire\PaymentGateways\Paypal;
 use App\Http\Livewire\PaymentGateways\Paystack;
@@ -39,5 +40,9 @@ Route::group(['prefix'=>'payment-gateway'],function(){
     Route::get('stripe',Stripe::class)->name('admin.stripe');
     Route::get('paypal',Paypal::class)->name('admin.paypal');
     Route::get('paystack',Paystack::class)->name('admin.paystack');
+    Route::get('flutterwave',Flutterwave::class)->name('admin.flutterwave');
 });
 Route::get('/services',Services::class)->name('admin.services');
+
+Route::get('/test',[Flutterwave::class,'Test'])->name('test');
+Route::get('/success',[Flutterwave::class,'success'])->name('success');
