@@ -13,6 +13,8 @@ use App\Http\Livewire\PaymentGateways\Razor;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Livewire\ShowPosts;
+use App\Http\Livewire\Success;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,3 +48,4 @@ Route::get('/services',Services::class)->name('admin.services');
 
 Route::get('/test',[Flutterwave::class,'Test'])->name('test');
 Route::get('/success',[Flutterwave::class,'success'])->name('success');
+Route::get('/success-page',Success::class)->name("success-page");

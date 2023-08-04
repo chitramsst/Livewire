@@ -4,6 +4,7 @@ namespace App\Http\Livewire\PaymentGateways;
 
 use Exception;
 use Livewire\Component;
+use Auth;
 
 class Flutterwave extends Component
 {
@@ -112,7 +113,7 @@ class Flutterwave extends Component
         //status=successful&tx_ref=1691124886&transaction_id=4504446
         // http://127.0.0.1:8000/success?status=successful&tx_ref=1691125222&transaction_id=4504449
         $status = request()->status;
-        $amount = $this->amount;
+        $amount = 11300;
         $tx_ref = request()->tx_ref;
         //if payment is successful
         if ($status ==  'successful') {
@@ -144,7 +145,6 @@ class Flutterwave extends Component
 
                 $response = json_decode($response, true);
                 
-                dd($response);
                 //if($response->status == )
                 $paymentStatus = $response['data']['status'];
                 $chargeResponsecode = $response['data']['chargecode'];
@@ -158,7 +158,10 @@ class Flutterwave extends Component
                     //Give Value and return to Success page
                     //   var_dump($resp);
                     //header('location: success.html');
-                    dd("success");
+                    // Auth::attempt(['email'=>'admin@admin.com','password'=>'123456']) {
+                    //     dd("success")                         
+                    // }
+                    return redirect()->route('success-page');
                   } else {
                     //Dont Give Value and return to Failure page
                     // var_dump($resp);
