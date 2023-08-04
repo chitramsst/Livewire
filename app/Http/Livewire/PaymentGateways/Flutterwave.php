@@ -16,7 +16,7 @@ class Flutterwave extends Component
         $amount = 11300;
         $first_name = "test";
         $last_name = "test";
-       $email = "chitra.xfortech.com";
+       $email = "chitra.xfortech@gmail.com";
        $redirect_url = route('success');
 
         try {
