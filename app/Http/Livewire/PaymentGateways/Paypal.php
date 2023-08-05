@@ -12,8 +12,9 @@ class Paypal extends Component
     {
         return view('livewire.payment-gateways.paypal');
     }
-    public function payment($amount){
-                $provider = new PayPalClient;
+    public function payment($amount)
+    {
+        $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
         $response = $provider->createOrder([
@@ -31,7 +32,6 @@ class Paypal extends Component
                 ]
             ]
         ]);
-        dd($response);
         if (isset($response['id']) && $response['id'] != null) {
             // redirect to approve href
             foreach ($response['links'] as $links) {
@@ -47,6 +47,5 @@ class Paypal extends Component
             //     ->route('createTransaction')
             //     ->with('error', $response['message'] ?? 'Something went wrong.');
         }
-
     }
 }

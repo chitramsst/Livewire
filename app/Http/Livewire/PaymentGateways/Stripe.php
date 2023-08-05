@@ -4,6 +4,7 @@ namespace App\Http\Livewire\PaymentGateways;
 
 use Livewire\Component;
 use Stripe as StripeComponent;
+use Stripe\StripeClient;
 
 class Stripe extends Component
 {
@@ -14,7 +15,50 @@ class Stripe extends Component
     return view('livewire.payment-gateways.stripe');
   }
 
-  public function check(){
+  public function stripeData($data){
+    try {
+      $stripe = new StripeClient("sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt");
+      $intent = $stripe->paymentIntents->create([
+          'amount' => 99 * 100,
+          'currency' => 'usd',
+          'payment_method' => $data,
+          'description' => 'Demo payment with stripe',
+          'confirm' => true,
+          'receipt_email' => "chitra.xfortech@gmail.com"
+      ]);
+  } 
+  catch ( \Exception $e )
+  {
+      dd($e);
+  }
+  $this->generateResponse($intent);
+  }
+  public function check() {
+    try {
+      $stripe = new StripeClient(env('STRIPE_SECRET'));
+
+      $stripe->paymentIntents->create([
+          'amount' => 99 * 100,
+          'automatic_payment_methods' => [
+            'enabled' => true,
+          ],
+          'currency' => 'usd',
+          //'payment_method' => $request->payment_method,
+          'description' => 'Demo payment with stripe',
+          'confirm' => true,
+          'receipt_email' => "chitra.xfortech@gmail.com"
+      ]);
+  } 
+  catch ( \Exception $e )
+  {
+      dd($e);
+  }
+
+  return back()->withSuccess('Payment done.');
+  }
+  
+
+  public function check1(){
     \Stripe\Stripe::setApiKey('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
     try {
         // Create the PaymentIntent
@@ -73,7 +117,6 @@ $status  = $stripe->paymentIntents->confirm(
   ['payment_method' => 'pm_card_visa',
   'return_url' => route('success')]
 );
-dd($status);
 // $stripe = new \Stripe\StripeClient('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
 
 // $stripe->paymentIntents->confirm(

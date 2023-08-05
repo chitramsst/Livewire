@@ -2,9 +2,11 @@
 <!-- https://medium.com/geekculture/paypal-payment-gateway-integration-with-laravel-ebebc7ccf470
 https://www.itsolutionstuff.com/post/laravel-58-paypal-integration-tutorialexample.html
 
-chitra.msst.office@gmail.com
+chitra.msst@gmail.com
 Tanishka@123#
+chitra.msst-buyer@gmail.com
 
+https://developer.paypal.com/dashboard/
 
 https://developer.paypal.com/dashboard/applications/sandbox
 create app
