@@ -8,6 +8,8 @@ secret key: sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpu
 https://stripe.com/docs/payments/without-card-authentication
 
 https://stripe.com/docs/payments/accept-a-payment-synchronously
+
+4000002500003155
 -->
 
     <div class="mx-64 pt-20">
@@ -57,6 +59,7 @@ https://stripe.com/docs/payments/accept-a-payment-synchronously
     // const cardElement = elements.create('card');
     // cardElement.mount('#card-element');
     // let stripe = Stripe('{{ env("STRIPE_KEY") }}')
+    // https://stripe.com/docs/india-exports"
     var stripe = Stripe("pk_test_51NThAcSEMAXsEqdSE8BfHTtUoBzEH0cHOfDk9zsfElRgbtHfRg3jrPxAsewbDYf996UkMaiPFgYMaQpfoQKt5cqY00tYjC1aN8");
     const elements = stripe.elements()
     const cardElement = elements.create('card', {
@@ -71,8 +74,20 @@ https://stripe.com/docs/payments/accept-a-payment-synchronously
     cardElement.mount('#card')
 
 
-    Livewire.on('setToken3', () => {
-
+    Livewire.on('confirmPayment', (key) => {
+       stripe
+                        .confirmCardPayment(key, {
+                            payment_method: {
+                                card: cardElement,
+                                billing_details: {
+                                    name: 'Jenny Rosen',
+                                },
+                            },
+                        })
+                        .then(function(result) {
+                            @this.call('processData',result);
+                            // Handle result.error or result.paymentIntent
+                        });
     });
     // Livewire.on('setToken', () => {
 
@@ -138,6 +153,9 @@ https://stripe.com/docs/payments/accept-a-payment-synchronously
                     cardForm.appendChild(input)
                     @this.stripeData(paymentMethod.id);
                 }
+            },
+            payment(){
+                alert("success")
             }
             // if (error) {
             //     console.log(error)

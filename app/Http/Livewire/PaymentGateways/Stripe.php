@@ -18,25 +18,52 @@ class Stripe extends Component
   public function stripeData($data){
     try {
       $stripe = new StripeClient("sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt");
+      
+      $stripe->customers->create([
+        'name' => 'Jenny Rosen',
+        'address' => [
+          'line1' => '510 Townsend St',
+          'postal_code' => '98140',
+          'city' => 'San Francisco',
+          'state' => 'CA',
+          'country' => 'US',
+        ],
+      ]);
+
+
       $intent = $stripe->paymentIntents->create([
           'amount' => 99 * 100,
           'currency' => 'usd',
           'payment_method' => $data,
           'description' => 'Demo payment with stripe',
           'confirm' => true,
-          'receipt_email' => "chitra.xfortech@gmail.com"
+          'receipt_email' => "chitra.xfortech@gmail.com",
+          'shipping' => [
+            'name' => 'Jenny Rosen',
+            'address' => [
+              'line1' => '510 Townsend St',
+              'postal_code' => '98140',
+              'city' => 'San Francisco',
+              'state' => 'CA',
+              'country' => 'US',
+            ],
+          ],
+        
       ]);
+     // dd($intent->client_secret);
+      $this->emit('confirmPayment',$intent->client_secret);
   } 
   catch ( \Exception $e )
   {
       dd($e);
   }
-  $this->generateResponse($intent);
+  //$this->generateResponse($intent);
   }
   public function check() {
     try {
       $stripe = new StripeClient(env('STRIPE_SECRET'));
 
+      
       $stripe->paymentIntents->create([
           'amount' => 99 * 100,
           'automatic_payment_methods' => [
@@ -57,7 +84,9 @@ class Stripe extends Component
   return back()->withSuccess('Payment done.');
   }
   
-
+public function processData($result){
+  dd($result);
+}
   public function check1(){
     \Stripe\Stripe::setApiKey('sk_test_51NThAcSEMAXsEqdS1m8Av7JZVyDLgoYiaOskSeiOQeccmAjFR0HSFUGjIpuanVQLR4pTU0KvpcQO0ZNZgwqiW1ry00EwyEW8Vt');
     try {
