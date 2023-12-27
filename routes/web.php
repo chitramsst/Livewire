@@ -11,9 +11,10 @@ use App\Http\Livewire\PaymentGateways\Paypal;
 use App\Http\Livewire\PaymentGateways\Paystack;
 use App\Http\Livewire\PaymentGateways\Razor;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\BarcodeGenerator;
 use App\Http\Livewire\ShowPosts;
 use App\Http\Livewire\Success;
+use App\Http\Livewire\BarcodePrintList;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ use App\Http\Livewire\Success;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/barcode-generator', BarcodeGenerator::class);
+Route::get('/barcode-print-list', BarcodePrintList::class);
 
 Route::get('/', Login::class);
 //Route::get('/dashboard', Dashboard::class);

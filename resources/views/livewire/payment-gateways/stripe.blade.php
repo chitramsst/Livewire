@@ -10,6 +10,11 @@ https://stripe.com/docs/payments/without-card-authentication
 https://stripe.com/docs/payments/accept-a-payment-synchronously
 
 4000002500003155
+
+have to check
+https://forum.laravel-livewire.com/t/best-practices-for-stripe-elements-w-livewire-alpine/1029/4
+
+https://www.twilio.com/blog/intro-alpine-js-twilio-verify-laravel-livewire
 -->
 
     <div class="mx-64 pt-20">
